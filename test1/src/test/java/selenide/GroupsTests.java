@@ -33,23 +33,31 @@ public class GroupsTests {
         groupsPage = new GroupsPage();
     }
 
-    @Test
-    @Order(2)
-    public void countGroups() {
-        groupsPage = new GroupsPage();
-        groupsPage.clickToOwnGroupButton();
-        Assertions.assertAll(() -> Assertions.assertNotEquals(0, groupsPage.countOwnGroups()),
-                () -> Assertions.assertEquals(1, groupsPage.countOwnGroups()));
-    }
+//    @Test
+//    @Order(2)
+//    public void countGroups() {
+//        groupsPage = new GroupsPage();
+//        groupsPage.clickToOwnGroupButton();
+//        Assertions.assertAll(() -> Assertions.assertNotEquals(0, groupsPage.countOwnGroups()),
+//                () -> Assertions.assertEquals(1, groupsPage.countOwnGroups()));
+//    }
+
+//    @Test
+//    @Order(3)
+//    public void createInterestsPage() {
+//        groupsPage = new GroupsPage();
+//        groupCategoryLayer = groupsPage.clickToCreateButton();
+//        createGroupLayer = groupCategoryLayer.selectInterestPage();
+//        createGroupLayer.crateGroup("lala");
+//    }
 
     @Test
-    @Order(3)
-    public void createInterestsPage() {
+    @Order(4)
+    public void createPost() {
         groupsPage = new GroupsPage();
         groupCategoryLayer = groupsPage.clickToCreateButton();
-        ;
         createGroupLayer = groupCategoryLayer.selectInterestPage();
-        createGroupLayer.crateGroup("lala");
+        createGroupLayer.crateGroup("lala").clickToWritePost();
     }
 
     @AfterAll

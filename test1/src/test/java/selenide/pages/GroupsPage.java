@@ -36,7 +36,7 @@ public class GroupsPage extends BasePage {
     }
 
     public int countOwnGroups() {
-        allGroups.shouldHaveSize(1);
+//        allGroups.shouldHaveSize(1);
         return allGroups.size();
     }
 
