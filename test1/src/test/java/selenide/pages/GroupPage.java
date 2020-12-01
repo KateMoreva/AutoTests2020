@@ -2,14 +2,10 @@ package selenide.pages;
 
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import java.util.Collections;
-import java.util.List;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 
 public class GroupPage extends BasePage {
     private static final By LOGO = By.className("toolbar_logo_img");
@@ -18,11 +14,12 @@ public class GroupPage extends BasePage {
     private static final By BUTTON_OF_DROPDOWN_MENU = By.xpath(".//span[@class='u-menu_a toggle-dropdown']");
     private static final By BUTTON_DELETE_GROUP = By.xpath(".//a[contains(@hrefattrs,'CardButtonsRemoveAltGroup')]");
     private static final By BUTTON_INVITE = By.xpath(".//a[contains(@hrefattrs,'AltGroupTopCardButtonsInviteFriends')]");
-    private static final By WRITE_POST =By.xpath(".//*[@class='pf-head_itx_a']");
+    private static final By WRITE_POST = By.xpath(".//*[@class='pf-head_itx_a']");
     private static final By POST = By.xpath(".//*[@class='group-feed']");
     private static final By POST_BUTTON = By.xpath(".//*[@class='posting_submit button-pro']");
 
-    private static final By POST_AREA = By.xpath(".//*[@class='posting-form_itx_w js-color-picker-block-w __empty emoji-m __size-1']");
+    private static final By POST_AREA = By.xpath(".//*[@data-module='postingForm/mediaText']");
+    private static final By POST_PLACEHOLDER = By.xpath(".//*[@class='input_placeholder']");
 
     private final SelenideElement logo = $(LOGO);
     private final SelenideElement name = $(NAME_OF_GROUP);
@@ -35,13 +32,12 @@ public class GroupPage extends BasePage {
     private final SelenideElement post_button = $(POST_BUTTON);
     private final SelenideElement post_area = $(POST_AREA);
 
-
-    public boolean checkGroupName(String expectedName){
+    public boolean checkGroupName(String expectedName) {
         return expectedName.equals(name.getText());
     }
 
 
-//    public void deleteGroup(){
+    //    public void deleteGroup(){
 //        click(BUTTON_OF_DROPDOWN_MENU, "Пропала кнопка выпадающего меню");
 //        Assert.assertTrue("Не прогрузилась кнопка Удалить",
 //                explicitWait(ExpectedConditions.visibilityOfElementLocated(BUTTON_DELETE_GROUP),
@@ -50,13 +46,12 @@ public class GroupPage extends BasePage {
 //        new ConfirmDeletingGroupLayer(driver);
 //    }
 //
-    public void clickToWritePost() {
-        sleep(2000);
-        click(write_post);
-        sleep(2000);
-        click(post_area);
-        type(post_area, "AAAAA", "No field");
+    public GroupPage clickToWritePost(String text) {
+        write_post.click();
+        post_area.click();
+        post_area.setValue(text);
         click(post_button);
+        return this;
     }
 
 //

@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.function.Executable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
@@ -43,7 +47,7 @@ public class FirstTest {
     @DisplayName("Lines match test")
     @Test
     public void linesMath() {
-        assumingThat(inputs.size() == 5, () -> assertAll("inputs",
+        assumingThat(inputs.size() == 5, (Executable) () -> assertAll("inputs",
                 () -> assertLinesMatch(inputs, checkLinesSame),
                 () -> assertNotSame(inputs, checkLinesDifferent)
         ));

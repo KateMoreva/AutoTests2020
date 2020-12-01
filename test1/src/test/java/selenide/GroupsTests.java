@@ -1,12 +1,14 @@
 package selenide;
 
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.*;
 
 import selenide.layers.CreateGroupLayer;
 import selenide.layers.GroupCategoryLayer;
-import selenide.pages.GroupsPage;
-import selenide.pages.LoginPage;
-import selenide.pages.MainPage;
+import selenide.pages.*;
+
+import java.util.List;
+import java.util.regex.Matcher;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -53,11 +55,30 @@ public class GroupsTests {
 
     @Test
     @Order(4)
-    public void createPost() {
+    public void groupPostInGroupsFeeds() {
         groupsPage = new GroupsPage();
         groupCategoryLayer = groupsPage.clickToCreateButton();
         createGroupLayer = groupCategoryLayer.selectInterestPage();
-        createGroupLayer.crateGroup("lala").clickToWritePost();
+        String postText = "Oh, no...";
+        createGroupLayer.crateGroup("lala").clickToWritePost(postText);
+        open(URL+"/feed");
+
+        Feeds groupPosts = new FeedBuilder()
+                .setType(FeedBuilder.FeedType.GROUPS)
+                .setPostsCount(2)
+                .buid();
+        Assertions.assertTrue(groupPosts.isContainsPostWithTest(postText));
+    }
+    @Test
+    @Order(5)
+    public void groupPostInFriendFeeds() {
+        String postText = "Oh, no...";
+
+        Feeds groupPosts = new FeedBuilder()
+                .setType(FeedBuilder.FeedType.FRIENDS)
+                .setPostsCount(1)
+                .buid();
+        Assertions.assertFalse(groupPosts.isContainsPostWithTest(postText));
     }
 
     @AfterAll
