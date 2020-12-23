@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.darkpingouin.todolist"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+lintOptions {
+         abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    androidTestCompile('androidx.test.espresso:espresso-core:3.2.0', {
+//        exclude group: 'androidx.test', module: 'support-annotations'
+//    })
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    implementation 'com.android.support:appcompat-v7:25.0.1'
+    implementation 'com.android.support:design:25.0.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:recyclerview-v7:21.0.0'
+    implementation 'com.android.support:support-v4:25.1.0'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+    implementation 'petrov.kristiyan.colorpicker:colorpicker-library:1.1.2'
+    implementation 'com.google.android.gms:play-services-appindexing:8.4.0'
+}
+
